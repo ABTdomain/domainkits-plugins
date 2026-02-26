@@ -1,0 +1,10 @@
+{
+  "name": "domainkits",
+  "version": "1.0.0",
+  "description": "Domain intelligence powered by live data. Search, analyze, monitor, and discover domain opportunities with live WHOIS, DNS, backlink, keyword, and market data.",
+  "author": "DomainKits",
+  "homepage": "https://domainkits.com",
+  "skills": [
+    "skills/domainkits.md"
+  ]
+}
