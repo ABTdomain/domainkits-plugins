@@ -1,0 +1,11 @@
+{
+  "name": "domainkits",
+  "version": "1.0.0",
+  "description": "Live domain intelligence for domain investors, brand protection, and security teams: new/expired/aged domain discovery, valuation, backlinks, keyword and market data, brand matching, WHOIS/DNS, availability with registrar pricing, and monitoring.",
+  "author": {
+    "name": "DomainKits"
+  },
+  "homepage": "https://domainkits.com",
+  "repository": "https://github.com/ABTdomain/domainkits-plugins",
+  "license": "MIT"
+}

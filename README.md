@@ -1,57 +1,99 @@
-# DomainKits Plugin for Claude
+# DomainKits — Domain Intelligence for Claude
 
-Domain intelligence powered by real-time data.
+Live domain data for three jobs: **finding domain opportunities**, **protecting your brand**, and **watching new registrations for threats**.
+
+DomainKits does the search, retrieval, and correlation — across WHOIS registries, DNS resolvers, gTLD zone pipelines, backlink indexes, keyword databases, and market listings. Claude does the analysis.
+
+**Coverage: gTLDs** (.com, .net, .org, .xyz, .app, and the other generic TLDs). ccTLDs (.io, .ai, .de, …) are not covered by the discovery and reverse-lookup datasets.
+
+## Who it's for
+
+### Domain investors — trends, discovery, valuation
+
+- "What keywords are spiking in new registrations this week — and which spikes are real demand vs. bulk speculation?"
+- "Find expired .com domains about fitness with a clean backlink profile" → `/domainkits:hunt`
+- "Is brightpay.com worth the $3k ask? Full due diligence" → `/domainkits:analyze brightpay.com`
+- "Which naming prefixes are trending, and where is the .com still open?"
+
+Registration-trend quality metrics separate signal from noise: .com share, for-sale ratio, registrar and nameserver concentration.
+
+### Brand protection — who is registering around your name
+
+- "Any new registrations containing 'acme' in the last 10 days?" → `/domainkits:watch acme`
+- "The same prefix just appeared across 30+ TLDs — is someone building around our name?"
+- "Where is 'acme' registered across gTLDs, and which are still open to defend?"
+- "Watch acme-related domains for WHOIS/DNS changes" (account feature)
+
+### Security teams — NRDs as the signal, nameserver correlation as the pivot
+
+- "New domains resembling 'ourbank' registered this week?" → `/domainkits:watch ourbank`
+- "This lookalike is live phishing — what else is hosted on its nameservers?" (`ns_reverse` maps the campaign)
+- "Any emerging keyword spikes with single-registrar, single-nameserver concentration?" (coordinated-operation signal)
+- "Full WHOIS/DNS workup on this suspicious domain" → `/domainkits:analyze`
+
+In Claude Code, results compose with everything else Claude can do: write triage reports and shortlists to files, run bulk pipelines over your domain lists, schedule recurring sweeps, cross-check with web research.
+
+## Commands
+
+| Command | For | What it does |
+|---|---|---|
+| `/domainkits:hunt [thesis]` | Investors | Opportunity discovery: expired, deleted, aged, trending, or unregistered names matching your thesis |
+| `/domainkits:watch <brand/keyword>` | Brand & security | Sweep new registrations and TLDs for a term; triage into benign / brand conflict / suspicious; pivot suspects through their nameservers |
+| `/domainkits:analyze <domain>` | Everyone | Full workup on one domain: registration, DNS, safety, backlinks, value, market signals |
+
+No command needed for ad-hoc questions — the bundled skill auto-activates whenever domains come up.
+
+## Capabilities
+
+- **Discover**: newly registered domains (last 60 days), expired, deleted, aged, and active domains; reverse-nameserver mapping (all gTLD domains behind one NS)
+- **Evaluate**: valuation (comparable sales), backlink profiles, keyword volume/CPC, aftermarket prices, sale probability, brand-conflict scoring, trend quality metrics (.com share, for-sale ratio, registrar/NS concentration)
+- **Act**: real-time availability with registrar pricing, bulk checks, name generation, plan-B alternatives
+- **Automate**: monitors (WHOIS/DNS/page changes) and recurring strategies on your DomainKits account
 
 ## Philosophy
 
-Claude already knows how to analyze domains. What it lacks is live data — WHOIS records, current DNS states, actual market prices, expiry data, and other data to check if the domain is a good one.
-DomainKits provides the data and optimized workflows. Claude provides the intelligence. No bloated skills, no redundant knowledge, no wasted context tokens.
+Claude already knows how to reason about domains. What it lacks is live data and the plumbing to correlate it. DomainKits provides both — search, retrieval, and pre-computed correlation across its datasets, with workflows maintained server-side. Claude provides the intelligence. The plugin is deliberately a thin shell: minimal context cost, no redundant knowledge, and server-side improvements land without plugin updates.
 
 ## Architecture
 
 ```
-Plugin (thin shell)
-  └── .mcp.json → DomainKits MCP Server (all capabilities)
-  └── skills/domainkits.md → Minimal entry point (~400 tokens)
+domainkits plugin
+├── .mcp.json                    → remote MCP server (https://api.domainkits.com/v1/mcp)
+├── skills/domainkits/SKILL.md   → thin entry point: task→tool map + usage norms
+└── commands/                    → /domainkits:hunt · /domainkits:watch · /domainkits:analyze
 ```
 
-All domain knowledge, workflow logic, and data retrieval optimization live server-side in the MCP endpoint. The plugin skill file is intentionally minimal — it declares what data is available, not how to think about it.
+No local code execution: the plugin is a remote endpoint, one skill file, and three command prompts.
 
 ## Install
 
-### Claude Code
-```bash
-claude plugin add domainkits
+**Claude Code** (CLI, desktop, or VS Code):
+
+```
+/plugin marketplace add ABTdomain/domainkits-plugins
+/plugin install domainkits@domainkits
 ```
 
-### Claude.ai / Cowork
-1. Settings → Connectors
-2. Add custom connector
-3. Name: `DomainKits`, URL: `https://api.domainkits.com/v1/mcp`
-4. Start a new conversation
+**claude.ai / Cowork** (as a connector instead of a plugin):
 
-## Capabilities
+1. Settings → Connectors → Add custom connector
+2. Name: `DomainKits`, URL: `https://api.domainkits.com/v1/mcp`
+3. Start a new conversation
 
-- **Search**: New registrations, aged, expired, deleted, active domains
-- **Query**: WHOIS, DNS, safety, availability with pricing
-- **Analyze**: Backlinks, keywords, market price, brand conflicts
-- **Trends**: TLD rankings, keyword trends, registration patterns
-- **Monitor**: Track domain changes over time (WHOIS, DNS, page content)
-- **Strategy**: Automated opportunity discovery
+## Tiers and limits
 
-## Data and domain expertise
+Works out of the box — no API key, no sign-up. The anonymous guest tier has daily per-tool limits, and some data sources (backlinks, market prices, keyword volume, safety checks, valuation) require an account.
 
-DomainKits returns live data — registration dates, DNS records, search volumes, market prices — and encodes domain industry expertise into optimized workflows. Claude interprets and reasons. Data stays current regardless of model version, workflows evolve with the industry, and analysis improves with each model generation.
+A free account at [domainkits.com](https://domainkits.com) raises limits; paid tiers unlock the full dataset. To connect your account in Claude Code, run `/mcp` and authenticate with `domainkits` (OAuth). On claude.ai the connector prompts for sign-in the same way. Ask Claude for your "DomainKits usage" anytime to see your quota.
 
-## Links
+## Data and privacy
 
-- Website: [domainkits.com](https://domainkits.com register to get more data)
-- MCP Endpoint: `https://api.domainkits.com/v1/mcp`
+Queries (domain names, keywords, search filters) are sent to `api.domainkits.com` to fetch results. The plugin reads no local files and ships no executable code. Monitors, strategies, and preferences are stored with your DomainKits account only when you explicitly ask Claude to create them.
 
-## Affiliate Disclosure
+## Affiliate disclosure
 
-Some links in the results may be affiliate links.
+Some links in results (registrars, marketplaces) may be affiliate links. The bundled skill instructs Claude to disclose this whenever it shares such links.
 
+## License
 
-License
-Code: MIT. Data provided by DomainKits.com,attribution required.
+Code: MIT (see [LICENSE](LICENSE)). Domain data is provided by [DomainKits.com](https://domainkits.com) under its own terms; attribution required when republishing data.

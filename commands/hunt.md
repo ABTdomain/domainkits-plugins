@@ -1,0 +1,13 @@
+---
+description: Hunt domain opportunities matching your investment thesis — expired, deleted, aged, trending, or unregistered names
+argument-hint: [thesis, e.g. "expired .com with clean backlinks under $500"]
+---
+
+Hunt for domain acquisition opportunities. Thesis from the user: $ARGUMENTS
+
+1. If no thesis was given, build one first: budget, TLDs, style (length, brandable vs. keyword), industry, risk appetite. Check saved `preferences` before asking; keep it to one round of questions.
+2. Pick sources to match the thesis — `expired` / `deleted` for drops, `aged` for established history, `nrds` for fresh registration trends, `trend_hunter` / `tld_trends` / `keywords_trends` for momentum (their quality metrics — .com share, for-sale ratio, registrar/NS concentration — separate organic demand from bulk speculation), `domain_generator` + `bulk_available` for unregistered brandables, `ns_reverse` for portfolio mining. Data covers gTLD zones.
+3. Shortlist 5–15 candidates, then verify the promising ones: `available` or `whois` for current status, plus whatever value signals the user's tier allows (`valuation_cma`, `backlink_summary`, `keyword_data`, `sale_chance`).
+4. On quota or tier-lock errors: skip, note it, continue — never retry.
+5. Present a ranked shortlist: name, why it fits the thesis, the live evidence, price and renewal cost, risks. Disclose affiliate links if any appear.
+6. Offer follow-ups: `/domainkits:analyze` on top picks; saving the thesis via `preferences`; writing the shortlist to a file; or — only with explicit consent — a recurring server-side `strategy`.
