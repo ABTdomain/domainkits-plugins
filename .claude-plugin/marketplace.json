@@ -4,14 +4,14 @@
     "name": "DomainKits"
   },
   "metadata": {
-    "description": "DomainKits official plugin marketplace — live domain intelligence for Claude Code.",
+    "description": "DomainKits official plugin marketplace — domain data search, retrieval, and correlation for Claude Code.",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "domainkits",
       "source": "./",
-      "description": "Live domain intelligence for domain investors, brand protection, and security teams: new/expired/aged domain discovery, valuation, backlinks, keyword and market data, brand matching, WHOIS/DNS, availability with registrar pricing, and monitoring.",
+      "description": "Domain data search, retrieval, and correlation for domain investors, brand protection, and security teams: new/expired/aged gTLD domain discovery, reverse-nameserver mapping, keyword registration trends, and WHOIS/DNS.",
       "version": "1.0.0",
       "author": {
         "name": "DomainKits"

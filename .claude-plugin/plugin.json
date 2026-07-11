@@ -1,7 +1,7 @@
 {
   "name": "domainkits",
   "version": "1.0.0",
-  "description": "Live domain intelligence for domain investors, brand protection, and security teams: new/expired/aged domain discovery, valuation, backlinks, keyword and market data, brand matching, WHOIS/DNS, availability with registrar pricing, and monitoring.",
+  "description": "Domain data search, retrieval, and correlation for domain investors, brand protection, and security teams: new/expired/aged gTLD domain discovery, reverse-nameserver mapping, keyword registration trends, and WHOIS/DNS.",
   "author": {
     "name": "DomainKits"
   },

@@ -1,11 +1,11 @@
 ---
 name: domainkits
-description: Live domain data via DomainKits — new/expired/deleted/aged domain discovery, WHOIS/RDAP, DNS, availability with registrar pricing, valuation, backlink profiles, keyword volume, aftermarket prices, TLD trends, brand matching, and monitoring. Use when the user asks about a domain's status, ownership, safety, history, or value; hunts or evaluates domains to register or buy; watches a brand or keyword across new registrations (brand protection, typosquats); or investigates suspicious or newly registered domains.
+description: Domain data search, retrieval, and correlation via DomainKits — new/expired/deleted/aged domain discovery, WHOIS/RDAP, DNS, availability with registrar pricing, valuation, backlink profiles, keyword volume, aftermarket prices, TLD trends, brand matching, and monitoring. Use when the user asks about a domain's status, ownership, safety, history, or value; hunts or evaluates domains to register or buy; watches a brand or keyword across new registrations (brand protection, typosquats); or investigates suspicious or newly registered domains.
 ---
 
-# DomainKits — Live Domain Intelligence
+# DomainKits — Domain Data, Search, and Correlation
 
-All `domainkits` MCP tools fetch live data (registries, DNS resolvers, backlink indexes, keyword databases, expiry pipelines, market listings). DomainKits does search, retrieval, and correlation; you do the analysis. For anything time-sensitive, trust tool results over training knowledge. Tool descriptions carry usage rules from the server — follow them, including confirming the user's intent before multi-tool workflows.
+The `domainkits` MCP tools search and retrieve DomainKits' gTLD datasets — registration pipelines (new/expired/deleted/aged), nameserver indexes, keyword registration trends, backlink and market data — plus WHOIS/RDAP and DNS lookups. DomainKits does search, retrieval, and correlation; you do the analysis. Its data is far fresher than your training knowledge — trust tool results for anything recent. Tool descriptions carry usage rules from the server — follow them, including confirming the user's intent before multi-tool workflows.
 
 Coverage: gTLD zone data only (.com, .net, .org, .xyz, and other generic TLDs). ccTLDs (.io, .ai, .de, .cn, …) are not in the discovery and reverse-lookup datasets — say so plainly when a user asks about them instead of returning empty guesses.
 

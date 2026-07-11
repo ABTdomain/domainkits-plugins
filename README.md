@@ -1,8 +1,8 @@
 # DomainKits — Domain Intelligence for Claude
 
-Live domain data for three jobs: **finding domain opportunities**, **protecting your brand**, and **watching new registrations for threats**.
+DomainKits turns gTLD domain data into answers. It does the search, retrieval, and correlation — across registration pipelines (new / expired / deleted / aged), nameserver indexes, keyword registration trends, WHOIS/DNS, backlink and market datasets. Claude does the analysis.
 
-DomainKits does the search, retrieval, and correlation — across WHOIS registries, DNS resolvers, gTLD zone pipelines, backlink indexes, keyword databases, and market listings. Claude does the analysis.
+Three jobs: **finding domain opportunities**, **protecting your brand**, and **watching new registrations for threats**.
 
 **Coverage: gTLDs** (.com, .net, .org, .xyz, .app, and the other generic TLDs). ccTLDs (.io, .ai, .de, …) are not covered by the discovery and reverse-lookup datasets.
 
@@ -27,7 +27,7 @@ Registration-trend quality metrics separate signal from noise: .com share, for-s
 ### Security teams — NRDs as the signal, nameserver correlation as the pivot
 
 - "New domains resembling 'ourbank' registered this week?" → `/domainkits:watch ourbank`
-- "This lookalike is live phishing — what else is hosted on its nameservers?" (`ns_reverse` maps the campaign)
+- "This lookalike is an active phishing site — what else is hosted on its nameservers?" (`ns_reverse` maps the campaign)
 - "Any emerging keyword spikes with single-registrar, single-nameserver concentration?" (coordinated-operation signal)
 - "Full WHOIS/DNS workup on this suspicious domain" → `/domainkits:analyze`
 
@@ -47,12 +47,12 @@ No command needed for ad-hoc questions — the bundled skill auto-activates when
 
 - **Discover**: newly registered domains (last 60 days), expired, deleted, aged, and active domains; reverse-nameserver mapping (all gTLD domains behind one NS)
 - **Evaluate**: valuation (comparable sales), backlink profiles, keyword volume/CPC, aftermarket prices, sale probability, brand-conflict scoring, trend quality metrics (.com share, for-sale ratio, registrar/NS concentration)
-- **Act**: real-time availability with registrar pricing, bulk checks, name generation, plan-B alternatives
+- **Act**: availability checks with registrar pricing, bulk checks, name generation, plan-B alternatives
 - **Automate**: monitors (WHOIS/DNS/page changes) and recurring strategies on your DomainKits account
 
 ## Philosophy
 
-Claude already knows how to reason about domains. What it lacks is live data and the plumbing to correlate it. DomainKits provides both — search, retrieval, and pre-computed correlation across its datasets, with workflows maintained server-side. Claude provides the intelligence. The plugin is deliberately a thin shell: minimal context cost, no redundant knowledge, and server-side improvements land without plugin updates.
+Claude already knows how to reason about domains. What it lacks is the data — and the plumbing to search and correlate it. DomainKits provides both: indexed gTLD datasets with search, retrieval, and pre-computed correlation, plus workflows maintained server-side. Claude provides the intelligence. The plugin is deliberately a thin shell: minimal context cost, no redundant knowledge, and server-side improvements land without plugin updates.
 
 ## Architecture
 
