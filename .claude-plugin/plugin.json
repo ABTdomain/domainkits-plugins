@@ -1,7 +1,7 @@
 {
   "name": "domainkits",
-  "version": "1.0.0",
-  "description": "Domain data search, retrieval, and correlation for domain investors, brand protection, and security teams: new/expired/aged gTLD domain discovery, reverse-nameserver mapping, keyword registration trends, and WHOIS/DNS.",
+  "version": "1.1.0",
+  "description": "Domain data search, retrieval, and correlation for domain investors, brand protection, and security teams: new/expired/aged gTLD domain discovery, reverse-nameserver mapping, keyword registration trends, and WHOIS/DNS. Bundles eight workflow skills: brand protection, domain due diligence, CMA valuation, name generation, keyword intelligence, and market briefings.",
   "author": {
     "name": "DomainKits"
   },

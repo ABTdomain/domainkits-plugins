@@ -11,7 +11,7 @@ Coverage: gTLD zone data only (.com, .net, .org, .xyz, and other generic TLDs). 
 
 Three common jobs, each with a guided command: domain investing (`/domainkits:hunt`), brand/keyword watching (`/domainkits:watch`), single-domain workup (`/domainkits:analyze`).
 
-DomainKits MCP serves raw data. For domain industry workflows (naming consultation, competitive analysis, keyword intelligence, expired domain due diligence, and more), see [DomainKits Skills](https://github.com/ABTdomain/domainkits-skills), an open-source collection of workflow prompts that any AI assistant can use on top of this data.
+DomainKits MCP serves raw data. This plugin also bundles eight open-source workflow skills that activate on matching tasks: brand-protection, domain-analyze, domain-cma-valuation, domain-generator, domain-name-advisor, keyword-intel, keyword-trend-hunter, and domain-market-beat. Source and standalone install: [DomainKits Skills](https://github.com/ABTdomain/domainkits-skills).
 
 ## Tools
 
@@ -29,7 +29,7 @@ DomainKits MCP serves raw data. For domain industry workflows (naming consultati
 
 ### Lookup
 - `available` -- Single-domain availability with pricing
-- `dns` -- DNS records (A, AAAA, MX, NS, TXT, SOA)
+- `dns` -- DNS records (A, AAAA, MX, NS, TXT, CNAME, SOA)
 - `whois` -- WHOIS/RDAP registration data
 - `safety` -- Google Safe Browsing status (requires account)
 - `tld_check` -- Keyword availability across TLDs
@@ -47,11 +47,11 @@ DomainKits MCP serves raw data. For domain industry workflows (naming consultati
 - `bulk_tld` -- Keyword popularity across TLDs
 - `bulk_available` -- Batch availability check (up to 10 domains)
 
-### Stateful (require memory)
-- `preferences` -- Manage memory and saved preferences (action: get/set/delete)
-- `monitor` -- Domain monitoring with WHOIS/DNS/page change checks (action: get/set/update/delete)
-- `strategy` -- Save and execute domain strategies (action: get/set/update/delete)
-- `usage` -- Current tier, per-group usage, and remaining quota
+### Account
+- `preferences` -- Manage memory and saved preferences (action: get/set/delete); memory must be enabled before monitors or strategies can be stored
+- `monitor` -- Domain monitoring with WHOIS/DNS/page change checks (action: get/set/update/delete); requires memory
+- `strategy` -- Store user-authored strategy text and its latest result (action: get/set/update/delete); requires memory; does not auto-run
+- `usage` -- Current tier, per-group usage, and remaining quota; works without memory
 
 ## Task -> tool map
 
@@ -84,22 +84,21 @@ Output rules:
 ## Norms
 
 - Monitors, strategies, and preferences persist on the user's DomainKits account. Create or change them only with the user's explicit consent.
-- Results may contain affiliate links (registrars, marketplaces). Disclose that when sharing such links.
+- Results contain no affiliate or referral links.
 - The anonymous guest tier has daily limits and locks some tools (backlinks, safety, keyword data). On a quota or locked-tool error, do not retry: tell the user what was limited and that a free account at domainkits.com raises limits. In Claude Code they can connect it by running `/mcp` and authenticating with `domainkits`.
 
 ## Access Tiers
 
-| | Guest | Member (free) | Premium | Platinum |
-|---|---|---|---|---|
-| **Search tools** | 5/min, 10/day | 20/min, 2000/day | 60/min, 2000/day | Unlimited |
-| **Lookup tools** | 5/min, 10/day | Varies | 20-50/min | Unlimited or high cap |
-| **Trend tools** | 5/min, 10/day | 10/min, 100/day | Unlimited | Unlimited |
-| **Bulk tools** | 5/min, 10/day | 5/min, 50/day | 8/min, 1000/day | Unlimited |
-| **Safety, Backlinks, Keywords** | Blocked | Limited | Limited | High cap or unlimited |
-| **Monitors** | -- | 5 | 50 | Unlimited |
-| **Strategies** | -- | 1 | 6 | Unlimited |
+| Per day | Guest | Member (free) | Lite | Premium | Platinum |
+|---|---|---|---|---|---|
+| **Domain Search (shared pool)** | 10 | 150 | 500 | 2,000 | Unlimited |
+| **WHOIS / DNS** | 5 / 5 | 20 / 40 | 100 / 150 | 200 / 300 | Unlimited |
+| **Typosquat** | 1 | 3 | 8 | 20 | Unlimited |
+| **Safety, Backlinks, Keyword data** | Blocked | Limited | Limited | Higher | Unlimited |
+| **Monitors (max)** | -- | 2 | 20 | 100 | Unlimited |
+| **Strategies (max)** | -- | -- | 3 | 10 | Unlimited |
 
-Register free at [domainkits.com](https://domainkits.com/register). [View pricing](https://domainkits.com/pricing).
+Daily quotas reset at 00:00 UTC. MCP limits are metered separately from the web interface. Full per-tool limits: [domainkits.com/mcp#limits](https://domainkits.com/mcp#limits). Register free at [domainkits.com](https://domainkits.com/register). [View pricing](https://domainkits.com/pricing).
 
 ## Privacy
 

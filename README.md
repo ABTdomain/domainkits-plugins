@@ -49,18 +49,34 @@ No command needed for ad-hoc questions. The bundled skill auto-activates wheneve
 - **Trends**: keyword registration trends with quality metrics (.com share, for-sale ratio, registrar/NS concentration), TLD ranking and historical trends
 - **Automate**: monitors (WHOIS/DNS/page changes) and recurring strategies on your DomainKits account
 
-For advanced domain industry workflows (naming consultation, competitive analysis, expired domain due diligence, and more), see [DomainKits Skills](https://github.com/ABTdomain/domainkits-skills), open-source workflow prompts built on top of this data.
+## Bundled workflow skills
+
+The plugin ships eight open-source workflow skills that auto-activate on matching tasks:
+
+| Skill | What it does |
+|---|---|
+| brand-protection | Scan typosquats and lookalike registrations around a brand, evaluate each domain individually on registration facts, offer monitoring |
+| domain-analyze | Evidence-based picture of one domain: registration, DNS, safety, backlinks, cross-TLD footprint, market context |
+| domain-cma-valuation | Comparative Market Analysis against verified for-sale substitutes in the same keyword market |
+| domain-generator | Creative brandable names from a keyword, concept, or taken domain, verified available at check time |
+| domain-name-advisor | Naming consultation across registration, drop-catch, backorder, and aftermarket paths |
+| keyword-intel | Evidence map for one keyword: search, advertiser, registration, supply, and transaction layers kept separate |
+| keyword-trend-hunter | Discover registration keyword spikes and validate them against new-registration cohort signals |
+| domain-market-beat | Time-bounded market briefing: sales, registration trends, and domain movements with source tiers |
+
+Source repo (standalone install for other agents): [DomainKits Skills](https://github.com/ABTdomain/domainkits-skills).
 
 ## Architecture
 
 ```
 domainkits plugin
 ├── .mcp.json                    → remote MCP server (https://api.domainkits.com/v1/mcp)
-├── skills/domainkits/SKILL.md   → skill: tool listing, task→tool map, usage norms, access tiers
+├── skills/domainkits/SKILL.md   → core skill: tool listing, task→tool map, usage norms, access tiers
+├── skills/<workflow>/SKILL.md   → 8 bundled workflow skills (brand-protection, domain-analyze, ...)
 └── commands/                    → /domainkits:hunt · /domainkits:watch · /domainkits:analyze
 ```
 
-No local code execution: the plugin is a remote endpoint, one skill file, and three command prompts.
+No local code execution: the plugin is a remote endpoint, nine skill files, and three command prompts.
 
 ## Install
 
@@ -81,15 +97,11 @@ No local code execution: the plugin is a remote endpoint, one skill file, and th
 
 Works out of the box, no API key, no sign-up. The anonymous guest tier has daily per-tool limits, and some data sources (backlinks, keyword volume, safety checks) require an account.
 
-A free account at [domainkits.com](https://domainkits.com) raises limits; paid tiers unlock the full dataset. To connect your account in Claude Code, run `/mcp` and authenticate with `domainkits` (OAuth). On claude.ai the connector prompts for sign-in the same way. Ask Claude for your "DomainKits usage" anytime to see your quota.
+A free account at [domainkits.com](https://domainkits.com) raises limits; paid tiers unlock the full dataset. Full per-tool limits by tier: [domainkits.com/mcp#limits](https://domainkits.com/mcp#limits). MCP limits are metered separately from the web interface. To connect your account in Claude Code, run `/mcp` and authenticate with `domainkits` (OAuth). On claude.ai the connector prompts for sign-in the same way. Ask Claude for your "DomainKits usage" anytime to see your quota.
 
 ## Data and privacy
 
 Queries (domain names, keywords, search filters) are sent to `api.domainkits.com` to fetch results. The plugin reads no local files and ships no executable code. Monitors, strategies, and preferences are stored with your DomainKits account only when you explicitly ask Claude to create them.
-
-## Affiliate disclosure
-
-Some links in results (registrars, marketplaces) may be affiliate links. The bundled skill instructs Claude to disclose this whenever it shares such links.
 
 ## License
 
