@@ -25,6 +25,7 @@ DomainKits MCP serves raw data. For domain industry workflows (naming consultati
 - `ns_reverse` -- Domains on a specific nameserver
 - `unregistered_ai` -- Unregistered short .ai domains (3-letter, pattern-based)
 - `domain_changes` -- Domain change detection across 4M+ monitored domains
+- `typosquat` -- Generate typosquat permutations and check which variants are registered
 
 ### Lookup
 - `available` -- Single-domain availability with pricing
