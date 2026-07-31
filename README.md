@@ -101,7 +101,19 @@ A free account at [domainkits.com](https://domainkits.com) raises limits; paid t
 
 ## Data and privacy
 
-Queries (domain names, keywords, search filters) are sent to `api.domainkits.com` to fetch results. The plugin reads no local files and ships no executable code. Monitors, strategies, and preferences are stored with your DomainKits account only when you explicitly ask Claude to create them.
+Queries (domain names, keywords, search filters) are sent to `api.domainkits.com` to fetch results. The plugin reads no local files and ships no executable code.
+
+Search and lookup tools are stateless: nothing you ask is retained. Three tools store data across sessions, and only after you enable memory:
+
+| Tool | What it stores |
+|---|---|
+| `monitor` | The domains you watch and the results of each check |
+| `preferences` | Your saved preferences and the memory switch |
+| `strategy` | Strategy text you wrote, run timestamps and the most recent result |
+
+Memory is off by default. Stored data is encrypted at rest (AES-256-GCM) in isolated per-user directories, is tied to your DomainKits account rather than to one client, and can be deleted in full at any time by asking Claude to delete your DomainKits data (GDPR Article 17).
+
+Responses contain no registrant personal data: WHOIS results carry registrar, dates, status codes and nameservers only.
 
 ## License
 
