@@ -1,10 +1,8 @@
-# DomainKits — Domain Intelligence for Claude
+# DomainKits: Domain Intelligence for Claude
 
-DomainKits turns gTLD domain data into answers. It does the search, retrieval, and correlation across registration pipelines (new / expired / deleted / aged), nameserver indexes, keyword registration trends, WHOIS/DNS, backlink and market datasets. Claude does the analysis.
+DomainKits turns domain data into answers. It does the search, retrieval, and correlation across registration pipelines (new / expired / deleted / aged), nameserver indexes, keyword registration trends, WHOIS/DNS, backlink and market datasets. Claude does the analysis.
 
 Three jobs: **finding domain opportunities**, **protecting your brand**, and **watching new registrations for threats**.
-
-**Coverage: gTLDs** (.com, .net, .org, .xyz, .app, and the other generic TLDs). ccTLDs (.io, .ai, .de, ...) are not covered by the discovery and reverse-lookup datasets.
 
 ## Who it's for
 
@@ -19,7 +17,7 @@ Three jobs: **finding domain opportunities**, **protecting your brand**, and **w
 
 - "Any new registrations containing 'acme' in the last 10 days?" → `/domainkits:watch acme`
 - "The same prefix just appeared across 30+ TLDs, is someone building around our name?"
-- "Where is 'acme' registered across gTLDs, and which are still open to defend?"
+- "Where is 'acme' registered across TLDs, and which are still open to defend?"
 - "Watch acme-related domains for WHOIS/DNS changes" (account feature)
 
 ### Security teams -- NRDs as the signal, nameserver correlation as the pivot
@@ -43,7 +41,7 @@ No command needed for ad-hoc questions. The bundled skill auto-activates wheneve
 
 ## Capabilities
 
-- **Discover**: newly registered domains (last 60 days), expired, deleted, aged, and active domains; reverse-nameserver mapping (all gTLD domains behind one NS); unregistered short .ai domains
+- **Discover**: newly registered, expired, deleted, aged, and active domains; reverse-nameserver mapping; unregistered short .ai domains
 - **Evaluate**: backlink profiles, keyword volume/CPC, aftermarket prices
 - **Act**: availability checks with registrar pricing, bulk checks, TLD-wide keyword availability
 - **Trends**: keyword registration trends with quality metrics (.com share, for-sale ratio, registrar/NS concentration), TLD ranking and historical trends
@@ -95,9 +93,7 @@ No local code execution: the plugin is a remote endpoint, nine skill files, and 
 
 ## Tiers and limits
 
-Works out of the box, no API key, no sign-up. The anonymous guest tier has daily per-tool limits, and some data sources (backlinks, keyword volume) require an account.
-
-A free account at [domainkits.com](https://domainkits.com) raises limits; paid tiers unlock the full dataset. Full per-tool limits by tier: [domainkits.com/mcp#limits](https://domainkits.com/mcp#limits). MCP limits are metered separately from the web interface. To connect your account in Claude Code, run `/mcp` and authenticate with `domainkits` (OAuth). On claude.ai the connector prompts for sign-in the same way. Ask Claude for your "DomainKits usage" anytime to see your quota.
+Works out of the box, no API key, no sign-up. Plans, limits, and account connection: [domainkits.com/mcp](https://domainkits.com/mcp). Ask Claude for your "DomainKits usage" anytime to see your tier and remaining quota.
 
 ## Data and privacy
 
