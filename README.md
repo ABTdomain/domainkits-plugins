@@ -99,6 +99,8 @@ Works out of the box, no API key, no sign-up. Plans, limits, and account connect
 
 Queries (domain names, keywords, search filters) are sent to `api.domainkits.com` to fetch results. The plugin reads no local files and ships no executable code.
 
+Some workflow skills can also use tools you have connected yourself, such as a URL threat check (after asking you), and your client's web search and fetch. Those requests go to those tools, not to DomainKits.
+
 Search and lookup tools are stateless: nothing you ask is retained. Three tools store data across sessions, and only after you enable memory:
 
 | Tool | What it stores |
