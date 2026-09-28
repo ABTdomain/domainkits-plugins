@@ -32,7 +32,7 @@ DomainKits MCP serves raw data. This plugin also bundles eight open-source workf
 - `dns` -- DNS records (A, AAAA, MX, NS, TXT, CNAME, SOA)
 - `whois` -- WHOIS/RDAP registration data
 - `tld_check` -- Keyword availability across TLDs
-- `keyword_data` -- Google Ads keyword data (requires account)
+- `keyword_data` -- Keyword search volume, CPC, and competition (requires account)
 - `price` -- Registration and renewal prices by TLD
 - `market_price` -- Secondary market listing prices
 - `backlink_summary` -- SEO backlink profile (requires account)
