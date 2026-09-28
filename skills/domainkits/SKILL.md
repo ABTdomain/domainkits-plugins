@@ -19,7 +19,7 @@ Before a multi-tool sequence the user did not ask for, confirm the goal with the
 |---|---|---|
 | Newly registered | `nrds_live`, `nrds` | Recent registrations by keyword or TLD. `nrds_live` for the newest names, `nrds` for a longer history with more filters |
 | Registered | `active`, `aged`, `market` | Live registered domains. `aged` for long registration histories, `market` for names with marketplace listing data |
-| Expired | `expired` | Domains in the deletion cycle, still held by the registrant |
+| Expired | `expired` | Domains in the deletion cycle, not yet open for registration |
 | Deleted | `deleted` | Domains that completed the deletion cycle and are open for registration |
 | Changes | `domain_changes` | Recent registration and status changes to premium names |
 | Unregistered | `unregistered_ai` | Short .ai names open for registration |
@@ -29,7 +29,7 @@ Before a multi-tool sequence the user did not ask for, confirm the goal with the
 - `whois`: registration data. `epp_status` explains the status codes it returns.
 - `dns`: DNS records.
 - `ip_lookup`: network operator and approximate location of an IP or domain.
-- `registrar`: who a registrar is and who runs it.
+- `registrar`: a registrar's accreditation and parent company.
 - `available`: whether one domain can be registered, and its price. `bulk_available`: the same question for a list of domains.
 - `tld_check`, `bulk_tld`: one name across TLDs.
 - `price`: registration and renewal prices by TLD. `market_price`: aftermarket listing price.
@@ -38,10 +38,11 @@ Before a multi-tool sequence the user did not ask for, confirm the goal with the
 
 ## Connect results when the user asks
 
-- Infrastructure behind a domain: nameservers from `whois` or `dns`, then `ns_reverse` for other domains on those nameservers, or on all of several at once. `ip_lookup` adds the network operator.
+- Infrastructure behind a domain: nameservers from `whois` or `dns`, then `ns_reverse` for other domains on those nameservers. `ip_lookup` adds the network operator.
 - Lookalikes of a brand: `typosquat` for registered variants of a domain; `nrds_live` or `nrds` for new registrations containing the brand keyword.
 - Current state of an `expired` result: `whois`.
 - Registrability of a `deleted` result: `available`.
+- Whether a domain is flagged as unsafe: DomainKits has no threat check. Use a URL threat-check tool the user has connected, or tell the user this check is unavailable.
 
 ## Report results
 

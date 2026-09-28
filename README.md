@@ -6,21 +6,21 @@ Three jobs: **finding domain opportunities**, **protecting your brand**, and **w
 
 ## Who it's for
 
-### Domain investors -- trends, discovery, valuation
+### Domain investors: trends, discovery, valuation
 
 - "What keywords are spiking in new registrations this week, and which spikes are real demand vs. bulk speculation?"
 - "Find expired .com domains about fitness with a clean backlink profile" → `/domainkits:hunt`
 - "Is brightpay.com worth the $3k ask? Full due diligence" → `/domainkits:analyze brightpay.com`
 - "Which naming prefixes are trending, and where is the .com still open?"
 
-### Brand protection -- who is registering around your name
+### Brand protection: what is getting registered around your name
 
 - "Any new registrations containing 'acme' in the last 10 days?" → `/domainkits:watch acme`
-- "The same prefix just appeared across 30+ TLDs, is someone building around our name?"
+- "The same prefix just appeared across 30+ TLDs. Is a registration pattern forming around our name?"
 - "Where is 'acme' registered across TLDs, and which are still open to defend?"
 - "Watch acme-related domains for WHOIS/DNS changes" (account feature)
 
-### Security teams -- NRDs as the signal, nameserver correlation as the pivot
+### Security teams: NRDs as the signal, nameserver correlation as the pivot
 
 - "New domains resembling 'ourbank' registered this week?" → `/domainkits:watch ourbank`
 - "This lookalike is an active phishing site, what else is hosted on its nameservers?" (`ns_reverse` maps the campaign)
@@ -37,7 +37,7 @@ In Claude Code, results compose with everything else Claude can do: write triage
 | `/domainkits:watch <brand/keyword>` | Brand & security | Sweep new registrations and TLDs for a term; triage into benign / brand conflict / suspicious; pivot suspects through their nameservers |
 | `/domainkits:analyze <domain>` | Everyone | Full workup on one domain: registration, DNS, backlinks, value, market signals |
 
-No command needed for ad-hoc questions. The bundled skill auto-activates whenever domains come up.
+No command needed for ad-hoc questions. The bundled skills load automatically when a task involves domains.
 
 ## Capabilities
 
@@ -45,7 +45,7 @@ No command needed for ad-hoc questions. The bundled skill auto-activates wheneve
 - **Evaluate**: backlink profiles, keyword volume/CPC, aftermarket prices
 - **Act**: availability checks with registrar pricing, bulk checks, TLD-wide keyword availability
 - **Trends**: keyword registration trends with quality metrics (.com share, for-sale ratio, registrar/NS concentration), TLD ranking and historical trends
-- **Automate**: monitors (WHOIS/DNS/page changes) and recurring strategies on your DomainKits account
+- **Track**: monitors (WHOIS/DNS/page changes) and saved strategies on your DomainKits account
 
 ## Bundled workflow skills
 
@@ -69,7 +69,7 @@ Source repo (standalone install for other agents): [DomainKits Skills](https://g
 ```
 domainkits plugin
 ├── .mcp.json                    → remote MCP server (https://api.domainkits.com/v1/mcp)
-├── skills/domainkits/SKILL.md   → core skill: tool usage guide (which tool, accepted parameters, reading results)
+├── skills/domainkits/SKILL.md   → core skill: tool usage guide (which tool for which task, combining and reporting results)
 ├── skills/<workflow>/SKILL.md   → 8 bundled workflow skills (brand-protection, domain-analyze, ...)
 └── commands/                    → /domainkits:hunt · /domainkits:watch · /domainkits:analyze
 ```
@@ -107,7 +107,7 @@ Search and lookup tools are stateless: nothing you ask is retained. Three tools 
 | `preferences` | Your saved preferences and the memory switch |
 | `strategy` | Strategy text you wrote, run timestamps and the most recent result |
 
-Memory is off by default. Stored data is encrypted at rest (AES-256-GCM) in isolated per-user directories, is tied to your DomainKits account rather than to one client, and can be deleted in full at any time by asking Claude to delete your DomainKits data (GDPR Article 17).
+Memory is off by default. When you turn it on, your monitors, preferences, and strategies are encrypted with AES-256-GCM and stored separately for each user, tied to your DomainKits account rather than to a single app. That is what lets you pick them up from any client connected to the same account: Claude Code, claude.ai, or another MCP client. You can delete all of it at any time by asking Claude to delete your DomainKits data (GDPR Article 17).
 
 Responses contain no registrant personal data: WHOIS results carry registrar, dates, status codes and nameservers only.
 
