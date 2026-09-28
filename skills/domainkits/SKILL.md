@@ -1,6 +1,6 @@
 ---
 name: domainkits
-description: Domain data search, retrieval, and correlation via DomainKits -- new/expired/deleted/aged domain discovery, WHOIS/RDAP, DNS, availability with registrar pricing, backlink profiles, keyword volume, aftermarket prices, TLD trends, and monitoring. Use when the user asks about a domain's status, ownership, safety, history, or value; hunts or evaluates domains to register or buy; watches a brand or keyword across new registrations (brand protection, typosquats); or investigates suspicious or newly registered domains.
+description: Domain data search, retrieval, and correlation via DomainKits -- new/expired/deleted/aged domain discovery, WHOIS/RDAP, DNS, availability with registrar pricing, backlink profiles, keyword volume, aftermarket prices, TLD trends, and monitoring. Use when the user asks about a domain's status, ownership, history, or value; hunts or evaluates domains to register or buy; watches a brand or keyword across new registrations (brand protection, typosquats); or investigates suspicious or newly registered domains.
 ---
 
 # DomainKits -- Domain Data, Search, and Correlation
@@ -31,7 +31,6 @@ DomainKits MCP serves raw data. This plugin also bundles eight open-source workf
 - `available` -- Single-domain availability with pricing
 - `dns` -- DNS records (A, AAAA, MX, NS, TXT, CNAME, SOA)
 - `whois` -- WHOIS/RDAP registration data
-- `safety` -- Google Safe Browsing status (requires account)
 - `tld_check` -- Keyword availability across TLDs
 - `keyword_data` -- Google Ads keyword data (requires account)
 - `price` -- Registration and renewal prices by TLD
@@ -55,9 +54,9 @@ DomainKits MCP serves raw data. This plugin also bundles eight open-source workf
 
 ## Task -> tool map
 
-- One domain, full picture: `whois` + `dns` + `safety` + `available` + `backlink_summary` + `keyword_data`. Single facets: any one of those.
+- One domain, full picture: `whois` + `dns` + `available` + `backlink_summary` + `keyword_data`. Single facets: any one of those.
 - Discover domains: `expired`, `deleted`, `aged`, `nrds` (new registrations), `active`, `market`, `ns_reverse`, `unregistered_ai`.
-- Brand & security watch: `nrds` for lookalikes and keyword hits in new registrations; pivot suspicious hits through `ns_reverse` (shared-nameserver correlation) to map related infrastructure; `keywords_trends` concentration metrics flag coordinated bulk operations; `tld_check` / `bulk_tld` for cross-TLD exposure; `domain_changes` for movement; `safety` / `active` for enrichment.
+- Brand & security watch: `nrds` for lookalikes and keyword hits in new registrations; pivot suspicious hits through `ns_reverse` (shared-nameserver correlation) to map related infrastructure; `keywords_trends` concentration metrics flag coordinated bulk operations; `tld_check` / `bulk_tld` for cross-TLD exposure; `domain_changes` for movement; `active` for enrichment.
 - Value & demand: `market_price`, `backlink_summary`, `keyword_data`, `market`.
 - Trends: `tld_rank`, `tld_trends`, `keywords_trends`.
 - Bulk checks: `bulk_available`, `bulk_tld`, `tld_check`.
@@ -74,7 +73,7 @@ When user wants domain suggestions:
 3. Show available options with prices
 
 When user wants to analyze a domain:
-1. Call `whois`, `dns`, `safety`
+1. Call `whois`, `dns`
 2. Give a clear verdict
 
 Output rules:
@@ -85,7 +84,7 @@ Output rules:
 
 - Monitors, strategies, and preferences persist on the user's DomainKits account. Create or change them only with the user's explicit consent.
 - Results contain no affiliate or referral links.
-- The anonymous guest tier has daily limits and locks some tools (backlinks, safety, keyword data). On a quota or locked-tool error, do not retry: tell the user what was limited and that a free account at domainkits.com raises limits. In Claude Code they can connect it by running `/mcp` and authenticating with `domainkits`.
+- The anonymous guest tier has daily limits and locks some tools (backlinks, keyword data). On a quota or locked-tool error, do not retry: tell the user what was limited and that a free account at domainkits.com raises limits. In Claude Code they can connect it by running `/mcp` and authenticating with `domainkits`.
 
 ## Access Tiers
 
@@ -94,7 +93,7 @@ Output rules:
 | **Domain Search (shared pool)** | 10 | 150 | 500 | 2,000 | Unlimited |
 | **WHOIS / DNS** | 5 / 5 | 20 / 40 | 100 / 150 | 200 / 300 | Unlimited |
 | **Typosquat** | 1 | 3 | 8 | 20 | Unlimited |
-| **Safety, Backlinks, Keyword data** | Blocked | Limited | Limited | Higher | Unlimited |
+| **Backlinks, Keyword data** | Blocked | Limited | Limited | Higher | Unlimited |
 | **Monitors (max)** | -- | 2 | 20 | 100 | Unlimited |
 | **Strategies (max)** | -- | -- | 3 | 10 | Unlimited |
 

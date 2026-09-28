@@ -37,14 +37,14 @@ In Claude Code, results compose with everything else Claude can do: write triage
 |---|---|---|
 | `/domainkits:hunt [thesis]` | Investors | Opportunity discovery: expired, deleted, aged, trending, or unregistered names matching your thesis |
 | `/domainkits:watch <brand/keyword>` | Brand & security | Sweep new registrations and TLDs for a term; triage into benign / brand conflict / suspicious; pivot suspects through their nameservers |
-| `/domainkits:analyze <domain>` | Everyone | Full workup on one domain: registration, DNS, safety, backlinks, value, market signals |
+| `/domainkits:analyze <domain>` | Everyone | Full workup on one domain: registration, DNS, backlinks, value, market signals |
 
 No command needed for ad-hoc questions. The bundled skill auto-activates whenever domains come up.
 
 ## Capabilities
 
 - **Discover**: newly registered domains (last 60 days), expired, deleted, aged, and active domains; reverse-nameserver mapping (all gTLD domains behind one NS); unregistered short .ai domains
-- **Evaluate**: backlink profiles, keyword volume/CPC, aftermarket prices, Google Safe Browsing status
+- **Evaluate**: backlink profiles, keyword volume/CPC, aftermarket prices
 - **Act**: availability checks with registrar pricing, bulk checks, TLD-wide keyword availability
 - **Trends**: keyword registration trends with quality metrics (.com share, for-sale ratio, registrar/NS concentration), TLD ranking and historical trends
 - **Automate**: monitors (WHOIS/DNS/page changes) and recurring strategies on your DomainKits account
@@ -56,7 +56,7 @@ The plugin ships eight open-source workflow skills that auto-activate on matchin
 | Skill | What it does |
 |---|---|
 | brand-protection | Scan typosquats and lookalike registrations around a brand, evaluate each domain individually on registration facts, offer monitoring |
-| domain-analyze | Evidence-based picture of one domain: registration, DNS, safety, backlinks, cross-TLD footprint, market context |
+| domain-analyze | Evidence-based picture of one domain: registration, DNS, backlinks, cross-TLD footprint, market context |
 | domain-cma-valuation | Comparative Market Analysis against verified for-sale substitutes in the same keyword market |
 | domain-generator | Creative brandable names from a keyword, concept, or taken domain, verified available at check time |
 | domain-name-advisor | Naming consultation across registration, drop-catch, backorder, and aftermarket paths |
@@ -95,7 +95,7 @@ No local code execution: the plugin is a remote endpoint, nine skill files, and 
 
 ## Tiers and limits
 
-Works out of the box, no API key, no sign-up. The anonymous guest tier has daily per-tool limits, and some data sources (backlinks, keyword volume, safety checks) require an account.
+Works out of the box, no API key, no sign-up. The anonymous guest tier has daily per-tool limits, and some data sources (backlinks, keyword volume) require an account.
 
 A free account at [domainkits.com](https://domainkits.com) raises limits; paid tiers unlock the full dataset. Full per-tool limits by tier: [domainkits.com/mcp#limits](https://domainkits.com/mcp#limits). MCP limits are metered separately from the web interface. To connect your account in Claude Code, run `/mcp` and authenticate with `domainkits` (OAuth). On claude.ai the connector prompts for sign-in the same way. Ask Claude for your "DomainKits usage" anytime to see your quota.
 
