@@ -44,7 +44,7 @@ No command needed for ad-hoc questions. The bundled skills load automatically wh
 - **Discover**: newly registered, expired, deleted, aged, and active domains; reverse-nameserver mapping; unregistered short .ai domains
 - **Evaluate**: backlink profiles, keyword volume/CPC, aftermarket prices
 - **Act**: availability checks with registrar pricing, bulk checks, TLD-wide keyword availability
-- **Trends**: keyword registration trends with quality metrics (.com share, for-sale ratio, registrar/NS concentration), TLD ranking and historical trends
+- **Trends**: keyword registration trends with quality metrics (.com share, sale-platform nameserver share, registrar/NS concentration), TLD ranking and historical trends
 - **Track**: monitors (WHOIS/DNS/page changes) and saved strategies on your DomainKits account
 
 ## Bundled workflow skills
