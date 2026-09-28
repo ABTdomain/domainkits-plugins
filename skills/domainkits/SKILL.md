@@ -34,7 +34,7 @@ Before a multi-tool sequence the user did not ask for, confirm the goal with the
 - `tld_check`, `bulk_tld`: one name across TLDs.
 - `price`: registration and renewal prices by TLD. `market_price`: aftermarket listing price.
 - `backlink_summary`: backlink profile. `keyword_data`: keyword search data.
-- `keywords_trends`, `tld_trends`, `tld_rank`: registration trends by keyword and by TLD.
+- `keywords_trends`: what people are registering recently, as keyword lists. `tld_trends`, `tld_rank`: registration trends by TLD.
 
 ## Connect results when the user asks
 
