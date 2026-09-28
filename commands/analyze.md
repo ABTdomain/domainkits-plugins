@@ -1,5 +1,5 @@
 ---
-description: Full due diligence on one domain: registration, DNS, backlinks, value, market signals
+description: Full due diligence on one domain (registration, DNS, backlinks, value, market signals)
 argument-hint: <domain>
 ---
 

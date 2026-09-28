@@ -71,7 +71,7 @@ Source repo (standalone install for other agents): [DomainKits Skills](https://g
 ```
 domainkits plugin
 ├── .mcp.json                    → remote MCP server (https://api.domainkits.com/v1/mcp)
-├── skills/domainkits/SKILL.md   → core skill: tool listing, task→tool map, usage norms, access tiers
+├── skills/domainkits/SKILL.md   → core skill: tool usage guide (which tool, accepted parameters, reading results)
 ├── skills/<workflow>/SKILL.md   → 8 bundled workflow skills (brand-protection, domain-analyze, ...)
 └── commands/                    → /domainkits:hunt · /domainkits:watch · /domainkits:analyze
 ```

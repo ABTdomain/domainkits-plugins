@@ -1,114 +1,68 @@
 ---
 name: domainkits
-description: Domain data search, retrieval, and correlation via DomainKits -- new/expired/deleted/aged domain discovery, WHOIS/RDAP, DNS, availability with registrar pricing, backlink profiles, keyword volume, aftermarket prices, TLD trends, and monitoring. Use when the user asks about a domain's status, ownership, history, or value; hunts or evaluates domains to register or buy; watches a brand or keyword across new registrations (brand protection, typosquats); or investigates suspicious or newly registered domains.
+description: How to use the DomainKits tools for domain data (newly registered, expired, and deleted domains; WHOIS, DNS, reverse nameserver, registrar, EPP status, and IP lookups; availability, prices, and registration trends). Use when calling these tools, to pick the right tool for each lifecycle stage, pass parameter values the tools accept, and read results and limit messages.
 ---
 
-# DomainKits -- Domain Data, Search, and Correlation
+# DomainKits tool guide
 
-The `domainkits` MCP tools search and retrieve DomainKits' gTLD datasets: registration pipelines (new/expired/deleted/aged), nameserver indexes, keyword registration trends, backlink and market data, plus WHOIS/RDAP and DNS lookups. DomainKits does search, retrieval, and correlation; you do the analysis. Its data is far fresher than your training knowledge. Trust tool results for anything recent. Tool descriptions carry usage rules from the server. Follow them, including confirming the user's intent before multi-tool workflows.
+DomainKits tools return domain data; the analysis is yours. Their data is fresher than your training knowledge, so for anything recent, go by the tool result. Each tool's description carries the server's own usage rules. Follow them.
 
-Coverage: gTLD zone data only (.com, .net, .org, .xyz, and other generic TLDs). ccTLDs (.io, .ai, .de, .cn, ...) are not in the discovery and reverse-lookup datasets. Say so plainly when a user asks about them instead of returning empty guesses.
+This skill covers tool usage only. The plugin's workflow skills (brand-protection, domain-analyze, domain-cma-valuation, domain-generator, domain-name-advisor, keyword-intel, keyword-trend-hunter, domain-market-beat) and the `/domainkits:hunt`, `/domainkits:watch`, and `/domainkits:analyze` commands load on matching tasks.
 
-Three common jobs, each with a guided command: domain investing (`/domainkits:hunt`), brand/keyword watching (`/domainkits:watch`), single-domain workup (`/domainkits:analyze`).
+Before a multi-tool sequence the user did not ask for, confirm the goal with the user. Tool calls count against their quota.
 
-DomainKits MCP serves raw data. This plugin also bundles eight open-source workflow skills that activate on matching tasks: brand-protection, domain-analyze, domain-cma-valuation, domain-generator, domain-name-advisor, keyword-intel, keyword-trend-hunter, and domain-market-beat. Source and standalone install: [DomainKits Skills](https://github.com/ABTdomain/domainkits-skills).
+## Pick the tool by lifecycle stage
 
-## Tools
+| Stage | Tool | What it answers |
+|---|---|---|
+| Newly registered | `nrds_live` | Names registered in the last three days across all TLDs, including country-code ones, with exact registration time and the name split into words |
+| Newly registered | `nrds` | Names registered in the last 60 days, with day-level dates, the cross-TLD count, and registration-term and for-sale filters |
+| Registered | `active` | Live registered domains matching a keyword: distribution and saturation |
+| Registered | `aged` | Registered domains with long registration histories |
+| Registered | `market` | Registered domains that carry marketplace listing data |
+| Expired | `expired` | Domains in the deletion cycle (expired, redemption, pending delete), still held by the registrant |
+| Deleted | `deleted` | Domains that completed the deletion cycle and are open for registration |
+| Changes | `domain_changes` | Recent registration and status changes to premium .com names |
+| Unregistered | `unregistered_ai` | Short .ai names still open for registration |
 
-### Search
-- `nrds` -- Newly registered domains, by keyword or browse a gTLD
-- `aged` -- Domains with 5-20+ years history
-- `expired` -- Domains entering deletion cycle, by keyword or browse a gTLD
-- `deleted` -- Just-dropped domains, available now
-- `active` -- Live registered domains (~240M gTLD database)
-- `market` -- Domains with marketplace listing data, by keyword or browse a gTLD
-- `ns_reverse` -- Domains on a specific nameserver
-- `unregistered_ai` -- Unregistered short .ai domains (3-letter, pattern-based)
-- `domain_changes` -- Domain change detection across 4M+ monitored domains
-- `typosquat` -- Generate typosquat permutations and check which variants are registered
+Coverage: `active`, `aged`, `market`, `expired`, `deleted`, and `ns_reverse` are gTLD-based. Country-code TLDs appear in `nrds_live` and in the most recent days of `nrds`. In `nrds`, which country-code TLDs a user can search depends on their plan.
 
-### Lookup
-- `available` -- Single-domain availability with pricing
-- `dns` -- DNS records (A, AAAA, MX, NS, TXT, CNAME, SOA)
-- `whois` -- WHOIS/RDAP registration data
-- `tld_check` -- Keyword availability across TLDs
-- `keyword_data` -- Keyword search volume, CPC, and competition (requires account)
-- `price` -- Registration and renewal prices by TLD
-- `market_price` -- Secondary market listing prices
-- `backlink_summary` -- SEO backlink profile (requires account)
+## Look up one domain
 
-### Trends
-- `keywords_trends` -- Hot, emerging, and prefix keywords in domain registrations
-- `tld_trends` -- Historical registration trends by TLD
-- `tld_rank` -- TLD rankings by registration volume
+- `whois`: registrar, dates, status codes, nameservers. Explain status codes with `epp_status` rather than from memory.
+- `dns`: A, AAAA, MX, NS, TXT, CNAME, and SOA records. Accepts hostnames and underscore names such as `_dmarc.example.com`. A `_for-sale` TXT record is the holder's own unverified claim.
+- `ip_lookup`: network operator and approximate location of an IP or domain. The location is IP-level, not the site owner's address.
+- `registrar`: accreditation, business contact, drop-catch flag, and `parent_id`, which shows who runs a reseller shell.
+- `available`: registrability and price of one domain at the moment of the check. `bulk_available`: the status of a list of domains at one point in time.
+- `tld_check`, `bulk_tld`: one name across many TLDs.
+- `price`: registration and renewal price per TLD. `market_price`: a domain's aftermarket listing price.
+- `backlink_summary`, `keyword_data`: backlink profile and keyword search data. Both need an account.
+- Trends: `keywords_trends` (keyword registration activity; a sample, not a demand or value measure), `tld_trends`, `tld_rank`.
 
-### Bulk
-- `bulk_tld` -- Keyword popularity across TLDs
-- `bulk_available` -- Batch availability check (up to 10 domains)
+## Connect results when the user asks
 
-### Account
-- `preferences` -- Manage memory and saved preferences (action: get/set/delete); memory must be enabled before monitors or strategies can be stored
-- `monitor` -- Domain monitoring with WHOIS/DNS/page change checks (action: get/set/update/delete); requires memory
-- `strategy` -- Store user-authored strategy text and its latest result (action: get/set/update/delete); requires memory; does not auto-run
-- `usage` -- Current tier, per-group usage, and remaining quota; works without memory
+- Infrastructure behind a domain: nameservers from `whois` or `dns`, then `ns_reverse` for the gTLD domains on that nameserver. Several nameservers return the domains that use all of them (higher plans). `ip_lookup` adds the network operator.
+- Lookalikes of a brand domain: `typosquat` for registered variants; `nrds_live` or `nrds` for recent registrations containing the brand keyword.
+- Current state of an `expired` result: its status can lag live registration data; `whois` shows the current state.
+- Registrability of a `deleted` result: `available` confirms it at the moment of the check.
 
-## Task -> tool map
+## Parameters
 
-- One domain, full picture: `whois` + `dns` + `available` + `backlink_summary` + `keyword_data`. Single facets: any one of those.
-- Discover domains: `expired`, `deleted`, `aged`, `nrds` (new registrations), `active`, `market`, `ns_reverse`, `unregistered_ai`.
-- Brand & security watch: `nrds` for lookalikes and keyword hits in new registrations; pivot suspicious hits through `ns_reverse` (shared-nameserver correlation) to map related infrastructure; `keywords_trends` concentration metrics flag coordinated bulk operations; `tld_check` / `bulk_tld` for cross-TLD exposure; `domain_changes` for movement; `active` for enrichment.
-- Value & demand: `market_price`, `backlink_summary`, `keyword_data`, `market`.
-- Trends: `tld_rank`, `tld_trends`, `keywords_trends`.
-- Bulk checks: `bulk_available`, `bulk_tld`, `tld_check`.
-- Pricing: `price` (registration/renewal by TLD), `available` (single-domain with pricing).
-- Account: `usage` (quota and tier), `preferences`, `monitor`, `strategy`.
+- Domain parameters take a bare domain such as `example.com`: no scheme, path, port, or email address.
+- `position` accepts `start`, `end`, `middle`, or `all` (substring match, the default).
+- Enumerated values (length ranges, age ranges, sort orders) differ between tools. Pass the exact values from the tool's own schema instead of reusing another tool's.
+- Browsing a TLD without a keyword needs a registered account. Guests search by keyword.
 
-Results compose with your other capabilities: offer to write shortlists or triage reports to files, run bulk pipelines over the user's domain lists, or set up recurring scans, when that serves the user's goal.
+## Read results
 
-## Instructions
+- Paged results: report `total_found` separately from the number of results reviewed, and say how many pages were checked. Fetch more pages only when the user wants them.
+- `dns` with no records returns success with empty records and a message. That is an answer (no records, or the domain does not exist), not a failure.
+- `bulk_available` statuses: `available`, `registered`, `expiring`, `reserved`, `unknown`. Treat `unknown` as unresolved, not as available.
+- `market_price` returning `not_found` means no listing in the marketplace data it covers, not that the domain is off the market.
+- Limit or plan messages (rate limit, daily limit, a tool or TLD not available on the plan): do not retry the same call. Tell the user what was limited. Limits depend on the account tier; details are at https://domainkits.com/mcp#limits. In Claude Code, the user connects an account by running `/mcp` and signing in to `domainkits`; on claude.ai the connector asks for sign-in.
 
-When user wants domain suggestions:
-1. Brainstorm names based on keywords
-2. Call `bulk_available` to validate
-3. Show available options with prices
+## Account tools
 
-When user wants to analyze a domain:
-1. Call `whois`, `dns`
-2. Give a clear verdict
-
-Output rules:
-- Default to `no_hyphen=true` and `no_number=true`
-- Use `usage` to check remaining quota before heavy operations
-
-## Norms
-
-- Monitors, strategies, and preferences persist on the user's DomainKits account. Create or change them only with the user's explicit consent.
-- Results contain no affiliate or referral links.
-- The anonymous guest tier has daily limits and locks some tools (backlinks, keyword data). On a quota or locked-tool error, do not retry: tell the user what was limited and that a free account at domainkits.com raises limits. In Claude Code they can connect it by running `/mcp` and authenticating with `domainkits`.
-
-## Access Tiers
-
-| Per day | Guest | Member (free) | Lite | Premium | Platinum |
-|---|---|---|---|---|---|
-| **Domain Search (shared pool)** | 10 | 150 | 500 | 2,000 | Unlimited |
-| **WHOIS / DNS** | 5 / 5 | 20 / 40 | 100 / 150 | 200 / 300 | Unlimited |
-| **Typosquat** | 1 | 3 | 8 | 20 | Unlimited |
-| **Backlinks, Keyword data** | Blocked | Limited | Limited | Higher | Unlimited |
-| **Monitors (max)** | -- | 2 | 20 | 100 | Unlimited |
-| **Strategies (max)** | -- | -- | 3 | 10 | Unlimited |
-
-Daily quotas reset at 00:00 UTC. MCP limits are metered separately from the web interface. Full per-tool limits: [domainkits.com/mcp#limits](https://domainkits.com/mcp#limits). Register free at [domainkits.com](https://domainkits.com/register). [View pricing](https://domainkits.com/pricing).
-
-## Privacy
-
-- Works without API key (guest access)
-- Memory OFF by default, requires explicit consent
-- All stored data encrypted at rest (AES-256-GCM)
-- GDPR compliant, delete data anytime via `preferences` with action: delete
-
-## Links
-
-- Website: https://domainkits.com/mcp
-- Skills: https://github.com/ABTdomain/domainkits-skills
-- GitHub: https://github.com/ABTdomain/domainkits-mcp
-- Contact: info@domainkits.com
+- `usage`: current tier, usage per tool group, and remaining quota. Works without memory.
+- `preferences`, `monitor`, `strategy`: stored on the user's DomainKits account. Memory must be enabled first, through `preferences`. Create, change, or delete any of them only with the user's explicit consent.
+- `strategy` stores text and the latest result; it does not run on its own. `preferences` with action `delete` erases all stored data.
