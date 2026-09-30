@@ -1,7 +1,7 @@
 {
   "name": "domainkits",
   "displayName": "DomainKits",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Domain data analysis for AI agents: newly registered, expired, and deleted domains, with WHOIS, DNS, and reverse nameserver lookups.",
   "author": {
     "name": "DomainKits"

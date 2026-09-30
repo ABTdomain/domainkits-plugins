@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "DomainKits official plugin marketplace: domain data search, retrieval, and correlation for Claude Code, plus bundled domain workflow skills.",
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "plugins": [
     {
       "name": "domainkits",
       "source": "./",
       "description": "Domain data analysis for AI agents: newly registered, expired, and deleted domains, with WHOIS, DNS, and reverse nameserver lookups.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "author": {
         "name": "DomainKits"
       },
