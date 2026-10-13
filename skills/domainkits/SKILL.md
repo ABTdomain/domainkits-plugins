@@ -17,7 +17,7 @@ Before a multi-tool sequence the user did not ask for, confirm the goal with the
 
 | Stage | Tools | What they find |
 |---|---|---|
-| Newly registered | `nrds_live`, `nrds` | Recent registrations by keyword or TLD. `nrds_live` for the newest names, `nrds` for a longer history with more filters |
+| Newly registered | `nrds` | Recent registrations by keyword or TLD, with filters |
 | Registered | `active`, `aged`, `market` | Live registered domains. `aged` for long registration histories, `market` for names with marketplace listing data |
 | Expired | `expired` | Domains in the deletion cycle, not yet open for registration |
 | Deleted | `deleted` | Domains deleted after expiring, as of the latest data update |
@@ -39,7 +39,7 @@ Before a multi-tool sequence the user did not ask for, confirm the goal with the
 ## Connect results when the user asks
 
 - Infrastructure behind a domain: nameservers from `whois` or `dns`, then `ns_reverse` for other domains on those nameservers. `ip_lookup` adds the network operator.
-- Lookalikes of a brand: `typosquat` for registered variants of a domain; `nrds_live` or `nrds` for new registrations containing the brand keyword.
+- Lookalikes of a brand: `typosquat` for registered variants of a domain; `nrds` for new registrations containing the brand keyword.
 - Current state of an `expired` result: `whois`.
 - Registrability of a `deleted` or `unregistered_short_domains` result: `available`.
 - Whether a domain is flagged as unsafe: DomainKits has no threat check. Use a URL threat-check tool the user has connected, or tell the user this check is unavailable.
